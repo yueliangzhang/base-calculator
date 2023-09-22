@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 )
 
@@ -38,10 +39,11 @@ func inputNumber(idx string) float64 {
 func inputOperator() string {
 	var operator string
 	isValid := false
-	operators := []string{"+", "-", "*", "/"}
+	//SR = square root
+	operators := []string{"+", "-", "*", "/", "**", "sr"}
 
 	for !isValid {
-		fmt.Println("Enter the operator: ")
+		fmt.Printf("Enter the operator(%v): \n", operators)
 		fmt.Scanln(&operator)
 
 		for _, v := range operators {
@@ -66,5 +68,9 @@ func operate(n1, n2 float64, operator string) {
 			fmt.Println("The second number is invalid")
 		}
 		fmt.Printf("%v / %v = %v\n", n1, n2, n1/n2)
+	case "**":
+		fmt.Printf("%v ** %v = %v\n", n1, n2, math.Pow(n1, n2))
+	case "sr":
+		fmt.Printf("The square root of %v = %v. The square root of %v = %v\n", n1, math.Sqrt(n1), n2, math.Sqrt(n2))
 	}
 }
