@@ -6,8 +6,19 @@ import (
 	"strconv"
 )
 
+var history = []string{}
+
 func main() {
 	for {
+		var options string
+		fmt.Printf("Check history press c, otherwise press any button")
+		fmt.Scanln(&options)
+		if options == "c" {
+			for i := range history {
+				fmt.Println(history[i])
+			}
+			continue
+		}
 		var number1, number2 float64
 		var operator string
 		//first number
@@ -56,21 +67,35 @@ func inputOperator() string {
 }
 
 func operate(n1, n2 float64, operator string) {
+	var output string
 	switch operator {
 	case "+":
-		fmt.Printf("%v + %v = %v\n", n1, n2, n1+n2)
+		output = fmt.Sprintf("%v + %v = %v\n", n1, n2, n1+n2)
+		history = append(history, output)
+		fmt.Println(output)
 	case "-":
-		fmt.Printf("%v - %v = %v\n", n1, n2, n1-n2)
+		output = fmt.Sprintf("%v - %v = %v\n", n1, n2, n1-n2)
+		history = append(history, output)
+		fmt.Println(output)
 	case "*":
-		fmt.Printf("%v * %v = %v\n", n1, n2, n1*n2)
+		output = fmt.Sprintf("%v * %v = %v\n", n1, n2, n1*n2)
+		history = append(history, output)
+		fmt.Println(output)
 	case "/":
 		if n2 == 0 {
 			fmt.Println("The second number is invalid")
+			return
 		}
-		fmt.Printf("%v / %v = %v\n", n1, n2, n1/n2)
+		output = fmt.Sprintf("%v / %v = %v\n", n1, n2, n1/n2)
+		history = append(history, output)
+		fmt.Println(output)
 	case "**":
-		fmt.Printf("%v ** %v = %v\n", n1, n2, math.Pow(n1, n2))
+		output = fmt.Sprintf("%v ** %v = %v\n", n1, n2, math.Pow(n1, n2))
+		history = append(history, output)
+		fmt.Println(output)
 	case "sr":
-		fmt.Printf("The square root of %v = %v. The square root of %v = %v\n", n1, math.Sqrt(n1), n2, math.Sqrt(n2))
+		output = fmt.Sprintf("The square root of %v = %v. The square root of %v = %v\n", n1, math.Sqrt(n1), n2, math.Sqrt(n2))
+		history = append(history, output)
+		fmt.Println(output)
 	}
 }
